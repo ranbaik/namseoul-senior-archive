@@ -64,8 +64,21 @@ button{font:inherit;color:inherit}
 .hero .credit{position:absolute;right:16px;bottom:10px;font-size:.68rem;color:rgba(251,243,230,.6)}
 
 /* music */
-.music[hidden]{display:none}
-.music{position:fixed;right:18px;bottom:18px;z-index:30;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 16px 6px 6px;box-shadow:var(--shadow);cursor:pointer;max-width:calc(100% - 36px)}
+.music{position:fixed;right:18px;bottom:18px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:calc(100% - 36px)}
+.yt[hidden]{display:none}
+.yt{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px;box-shadow:var(--shadow);width:238px}
+.yt iframe{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;border-radius:6px}
+.yt a{display:block;font-size:.72rem;color:var(--ink-3);text-decoration:none;padding:4px 2px 0}
+.yt a:hover{color:var(--accent)}
+.mbtn{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 16px 6px 6px;box-shadow:var(--shadow);cursor:pointer;max-width:100%}
+body.study-open .music{left:8px;top:8px;right:auto;bottom:auto;flex-direction:column-reverse;align-items:flex-start}
+body.study-open .mbtn{padding:3px}
+body.study-open .mbtn .mt,body.study-open .mbtn .eq{display:none}
+body.study-open .yt{width:132px;padding:4px}
+body.study-open .yt a{display:none}
+body.study-open{overflow:hidden}
+.scrim[hidden]{display:none}
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(25,18,12,.55);backdrop-filter:blur(2px)}
 .music .disc{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fbf3e6;font-size:1rem;
   background:radial-gradient(circle,var(--card) 0 5px,var(--seal) 6px 100%)}
 .music.on .disc{animation:spin 6s linear infinite}
@@ -76,8 +89,6 @@ button{font:inherit;color:inherit}
 .music .eq i{width:3px;background:var(--accent);height:4px;border-radius:1px}
 .music.on .eq i{animation:eq 1s ease-in-out infinite}
 .music.on .eq i:nth-child(2){animation-delay:.2s}.music.on .eq i:nth-child(3){animation-delay:.4s}
-dialog .music{left:8px;top:8px;right:auto;bottom:auto;padding:3px}
-dialog .music .mt,dialog .music .eq{display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes eq{0%,100%{height:4px}50%{height:14px}}
 .eyebrow{font-size:.72rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
@@ -138,6 +149,7 @@ section{padding:64px 0}
 footer{border-top:1px solid var(--line);padding:32px 0 104px;color:var(--ink-3);font-size:.85rem}
 
 /* study dialog */
+dialog[open]{position:fixed;inset:0;margin:auto;height:fit-content;z-index:50}
 dialog{border:0;padding:0;max-width:980px;width:calc(100% - 32px);max-height:calc(100vh - 32px);border-radius:14px;background:var(--card);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35)}
 dialog::backdrop{background:rgba(25,18,12,.55);backdrop-filter:blur(2px)}
 .study{display:grid;grid-template-columns:280px 1fr;min-height:560px;max-height:calc(100vh - 32px)}
@@ -307,12 +319,19 @@ dialog::backdrop{background:rgba(25,18,12,.55);backdrop-filter:blur(2px)}
 
 <dialog id="dlg" aria-labelledby="dlgName"></dialog>
 
-<button class="music" id="music" hidden aria-pressed="false" aria-label="찬양 재생: 야곱의 축복">
-  <span class="disc" aria-hidden="true">♪</span>
-  <span class="mt"><b>야곱의 축복</b><span id="musicState">찬양 듣기 · 조수진</span></span>
-  <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
-</button>
-<audio id="bgm" src="music/jacobs-blessing.mp3" preload="none" loop></audio>
+<div class="scrim" id="scrim" hidden></div>
+
+<div class="music" id="music">
+  <div class="yt" id="ytCard" hidden>
+    <div id="ytPlayer"></div>
+    <a href="https://www.youtube.com/watch?v=NE-TFUGEXQQ" target="_blank" rel="noopener">유튜브에서 보기 ↗</a>
+  </div>
+  <button class="mbtn" id="musicBtn" aria-pressed="false" aria-label="찬양 재생: 축복, 남서울교회 이스라엘 찬양대">
+    <span class="disc" aria-hidden="true">♪</span>
+    <span class="mt"><b>찬양 · 축복</b><span id="musicState">남서울교회 이스라엘 찬양대</span></span>
+    <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+</div>
 
 <script src="data.js"></script>
 <script>
@@ -333,16 +352,27 @@ dialog::backdrop{background:rgba(25,18,12,.55);backdrop-filter:blur(2px)}
   try{ if (localStorage.getItem("nsa-big")) setBig(true); }catch(_){}
   bb.onclick = () => setBig(!html.classList.contains("big"));
 
-  // hymn player (plays only when pressed)
-  const mb = $("#music"), au = $("#bgm"), ms = $("#musicState");
-  const sync = () => { const on = !au.paused; mb.classList.toggle("on", on); mb.setAttribute("aria-pressed", on);
-    mb.setAttribute("aria-label", (on ? "찬양 멈춤" : "찬양 재생") + ": 야곱의 축복"); ms.textContent = on ? "재생 중 · 누르면 멈춤" : "찬양 듣기 · 조수진"; };
-  // show the player only when the song file is actually in the site (music/ is not published yet)
-  fetch(au.getAttribute("src"), { method: "HEAD" }).then(r => { if (r.ok) mb.hidden = false; }).catch(() => {});
-  mb.onclick = () => { if (au.paused) au.play().catch(() => {}); else au.pause(); };
-  au.addEventListener("play", sync); au.addEventListener("pause", sync);
-  // keep the player above the open study dialog
-  new MutationObserver(() => { const d = $("#dlg"); (d.open ? d : document.body).appendChild(mb); }).observe($("#dlg"), { attributes: true, attributeFilter: ["open"] });
+  // hymn: 남서울교회 공식 유튜브 영상 (plays only when pressed, loops)
+  const VID = "NE-TFUGEXQQ", mw = $("#music"), mb = $("#musicBtn"), ms = $("#musicState");
+  let yt = null, loading = false;
+  const sync = on => { mw.classList.toggle("on", on); mb.setAttribute("aria-pressed", on);
+    mb.setAttribute("aria-label", (on ? "찬양 멈춤" : "찬양 재생") + ": 축복, 남서울교회 이스라엘 찬양대");
+    ms.textContent = on ? "재생 중 · 누르면 멈춤" : "남서울교회 이스라엘 찬양대"; };
+  function makePlayer(){
+    $("#ytCard").hidden = false;
+    yt = new YT.Player("ytPlayer", { videoId: VID, width: 224, height: 126,
+      playerVars: { autoplay: 1, playsinline: 1, rel: 0, loop: 1, playlist: VID },
+      events: { onReady: e => e.target.playVideo(), onStateChange: e => sync(e.data === YT.PlayerState.PLAYING) } });
+  }
+  mb.onclick = () => {
+    if (yt && yt.getPlayerState) { yt.getPlayerState() === YT.PlayerState.PLAYING ? yt.pauseVideo() : yt.playVideo(); return; }
+    if (loading) return; loading = true; ms.textContent = "불러오는 중…";
+    if (window.YT && YT.Player) return makePlayer();
+    window.onYouTubeIframeAPIReady = makePlayer;
+    const s = document.createElement("script"); s.src = "https://www.youtube.com/iframe_api";
+    s.onerror = () => { loading = false; ms.textContent = "인터넷 연결을 확인해 주세요"; };
+    document.head.appendChild(s);
+  };
 
   // stats
   const gens = E.filter(e => e.o && e.o[0]).map(e => e.o[0]);
@@ -440,13 +470,18 @@ dialog::backdrop{background:rgba(25,18,12,.55);backdrop-filter:blur(2px)}
   }
   function open(id, t){
     cur = (id + E.length) % E.length; tab = t || "life"; render();
-    if (!dlg.open) dlg.showModal();
+    // non-modal dialog + own scrim, so the hymn player can stay on top and keep playing
+    if (!dlg.open){ dlg.show(); $("#scrim").hidden = false; document.body.classList.add("study-open"); const x = dlg.querySelector(".x"); if (x) x.focus(); }
     history.replaceState(null, "", "#e/" + encodeURIComponent(key(E[cur])));
   }
-  function close(){ dlg.close(); }
-  dlg.addEventListener("close", () => { if (location.hash.startsWith("#e/")) history.replaceState(null, "", "#shelf"); });
+  function close(){
+    if (dlg.open) dlg.close();
+    $("#scrim").hidden = true; document.body.classList.remove("study-open");
+    if (location.hash.startsWith("#e/")) history.replaceState(null, "", "#shelf");
+  }
+  $("#scrim").onclick = close;
+  document.addEventListener("keydown", ev => { if (ev.key === "Escape" && dlg.open) close(); });
   dlg.onclick = ev => {
-    if (ev.target === dlg) return close();
     const t = ev.target.closest("[data-t]"); if (t){ tab = t.dataset.t; render(); dlg.querySelector(`[data-t="${tab}"]`).focus(); return; }
     const g = ev.target.closest("[data-go]"); if (g) return open(cur + +g.dataset.go, tab);
     const p = ev.target.closest(".peer"); if (p) return open(+p.dataset.id);
