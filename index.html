@@ -21,13 +21,13 @@
   :root:not([data-theme="light"]){
     --paper:#1d1814; --paper-2:#26201a; --card:#2a231c; --ink:#efe5d4; --ink-2:#c7b8a2; --ink-3:#988a77;
     --line:#41372d; --wood:#5a3c26; --wood-2:#3b281a; --wood-hi:#77553a; --accent:#d77a6c; --gold:#cfae6a; --seal:#c25a4d;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35); --logo-filter:invert(1) hue-rotate(180deg) brightness(1.1);
   }
 }
 :root[data-theme="dark"]{
   --paper:#1d1814; --paper-2:#26201a; --card:#2a231c; --ink:#efe5d4; --ink-2:#c7b8a2; --ink-3:#988a77;
   --line:#41372d; --wood:#5a3c26; --wood-2:#3b281a; --wood-hi:#77553a; --accent:#d77a6c; --gold:#cfae6a; --seal:#c25a4d;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35); --logo-filter:invert(1) hue-rotate(180deg) brightness(1.1);
 }
 html.big{ --fs:21px; }
 *{box-sizing:border-box}
@@ -42,6 +42,8 @@ button{font:inherit;color:inherit}
 .top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:16px;height:60px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--serif);font-weight:700;font-size:1.05rem;white-space:nowrap}
+.logo{height:42px;width:auto;display:block;filter:var(--logo-filter,none)}
+.brand .long{padding-left:12px;border-left:1px solid var(--line);color:var(--ink-2);font-size:.95rem}
 .seal{width:32px;height:32px;border-radius:6px;background:var(--seal);color:#fbefe6;display:grid;place-items:center;font-family:var(--serif);font-size:18px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.15)}
 .nav{display:flex;gap:4px;margin-left:auto}
 .nav a{text-decoration:none;font-size:.88rem;color:var(--ink-2);padding:6px 10px;border-radius:6px}
@@ -225,7 +227,7 @@ dialog::backdrop{background:rgba(25,18,12,.55);backdrop-filter:blur(2px)}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#lobby"><span class="seal" aria-hidden="true">南</span>남서울교회<span class="long">&nbsp;시니어 아카이브</span></a>
+    <a class="brand" href="#lobby"><img class="logo" src="images/logo.png" alt="대한예수교장로회 남서울교회" width="198" height="66"><span class="long">시니어 아카이브</span></a>
     <nav class="nav" aria-label="주요 메뉴">
       <a href="#lobby">로비</a>
       <a href="#shelf">은퇴장로 서가</a>
