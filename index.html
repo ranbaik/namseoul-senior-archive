@@ -64,9 +64,11 @@ button{font:inherit;color:inherit}
 .hero .credit{position:absolute;right:16px;bottom:10px;font-size:.68rem;color:rgba(251,243,230,.6)}
 
 /* music */
-.music{position:fixed;right:18px;bottom:18px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:calc(100% - 36px)}
+/* top-right under the header (over the photo side of the hero); bottom-right on phones so it doesn't cover the title */
+.music{position:fixed;right:18px;top:72px;z-index:60;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:8px;max-width:calc(100% - 36px)}
+@media (max-width:767px){ body:not(.study-open) .music{top:auto;bottom:18px;flex-direction:column} }
 .yt[hidden]{display:none}
-.yt{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px;box-shadow:var(--shadow);width:238px}
+.yt{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px;box-shadow:var(--shadow);width:224px}
 .yt iframe{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;border-radius:6px}
 .ytbar{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:5px 2px 0}
 .yt a{font-size:.72rem;color:var(--ink-3);text-decoration:none}
@@ -75,7 +77,7 @@ button{font:inherit;color:inherit}
 .stop:hover{border-color:var(--accent);color:var(--accent)}
 .music .disc{font-size:.8rem;letter-spacing:-.1em}
 .mbtn{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 16px 6px 6px;box-shadow:var(--shadow);cursor:pointer;max-width:100%}
-body.study-open .music{left:8px;top:8px;right:auto;bottom:auto;flex-direction:column-reverse;align-items:flex-start}
+body.study-open .music{top:8px;left:8px;right:auto;align-items:flex-start}
 body.study-open .mbtn{padding:3px}
 body.study-open .mbtn .mt,body.study-open .mbtn .eq{display:none}
 body.study-open .yt{width:132px;padding:4px}
@@ -366,22 +368,43 @@ dialog::backdrop{background:rgba(25,18,12,.55);backdrop-filter:blur(2px)}
     mb.setAttribute("aria-label", (on ? "찬양 일시정지" : "찬양 재생") + ": 야곱의 축복, 남서울교회 꿈모아 중창단");
     $("#musicIcon").textContent = on ? "❚❚" : "▶";
     ms.textContent = on ? "재생 중 · 누르면 일시정지" : started ? "일시정지 · 누르면 다시 듣기" : "남서울교회 꿈모아 중창단"; };
-  $("#musicStop").onclick = () => { if (yt && yt.stopVideo) yt.stopVideo(); $("#ytCard").hidden = true; started = false; sync(false); mb.focus(); };
+  const OFF = "nsa-music-off";
+  const ss = { get(){ try{ return sessionStorage.getItem(OFF); }catch(_){ return null; } }, set(v){ try{ v ? sessionStorage.setItem(OFF, "1") : sessionStorage.removeItem(OFF); }catch(_){} } };
+  $("#musicStop").onclick = () => { if (yt && yt.stopVideo) yt.stopVideo(); $("#ytCard").hidden = true; started = false; sync(false); ss.set(true); mb.focus(); };
+  // Browsers usually block sound until the visitor touches the page, so if autoplay is refused,
+  // start on the first tap / click / key press anywhere.
+  function waitForTouch(){
+    ms.textContent = "화면을 한 번 누르면 찬양이 시작됩니다";
+    const go = ev => {
+      if (ev.target.closest && ev.target.closest("#music")) return;  // its own buttons handle themselves
+      ["pointerdown","keydown"].forEach(t => document.removeEventListener(t, go, true));
+      if (!ss.get() && yt && yt.playVideo) yt.playVideo();
+    };
+    ["pointerdown","keydown"].forEach(t => document.addEventListener(t, go, true));
+  }
   function makePlayer(){
     $("#ytCard").hidden = false;
     yt = new YT.Player("ytPlayer", { videoId: VID, width: 224, height: 126,
       playerVars: { autoplay: 1, playsinline: 1, rel: 0, loop: 1, playlist: VID },
-      events: { onReady: e => e.target.playVideo(), onStateChange: e => sync(e.data === YT.PlayerState.PLAYING) } });
+      events: {
+        onReady: e => { e.target.playVideo(); setTimeout(() => { if (!started && !ss.get()) waitForTouch(); }, 1800); },
+        onStateChange: e => sync(e.data === YT.PlayerState.PLAYING) } });
   }
   mb.onclick = () => {
+    ss.set(false);
     if (yt && yt.getPlayerState) { $("#ytCard").hidden = false; yt.getPlayerState() === YT.PlayerState.PLAYING ? yt.pauseVideo() : yt.playVideo(); return; }
+    loadPlayer();
+  };
+  function loadPlayer(){
     if (loading) return; loading = true; ms.textContent = "불러오는 중…";
     if (window.YT && YT.Player) return makePlayer();
     window.onYouTubeIframeAPIReady = makePlayer;
     const s = document.createElement("script"); s.src = "https://www.youtube.com/iframe_api";
     s.onerror = () => { loading = false; ms.textContent = "인터넷 연결을 확인해 주세요"; };
     document.head.appendChild(s);
-  };
+  }
+  // start the hymn when the page opens (unless it was turned off earlier in this visit)
+  if (!ss.get()) loadPlayer();
 
   // stats
   const gens = E.filter(e => e.o && e.o[0]).map(e => e.o[0]);
