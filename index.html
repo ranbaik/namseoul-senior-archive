@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>남서울교회 시니어 아카이브</title>
+<meta name="description" content="남서울교회와 반세기를 함께 걸어 온 어른들의 기록. 첫 서가는 은퇴장로님들입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5eee1; --paper-2:#ece2d0; --card:#fbf7ef; --ink:#2a2018; --ink-2:#5e5043; --ink-3:#8a7b6a;
+  --line:#d9ccb6; --wood:#6e4b30; --wood-2:#4f3421; --wood-hi:#8b6443;
+  --accent:#8c2f28; --gold:#a8843f; --seal:#a3352c;
+  --spine-text:#f7efe0; --shadow:0 1px 2px rgba(60,40,20,.12),0 8px 24px rgba(60,40,20,.10);
+  --serif:"Gowun Batang","Noto Serif KR",serif; --sans:"Noto Sans KR",system-ui,sans-serif;
+  --fs:17px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1d1814; --paper-2:#26201a; --card:#2a231c; --ink:#efe5d4; --ink-2:#c7b8a2; --ink-3:#988a77;
+    --line:#41372d; --wood:#5a3c26; --wood-2:#3b281a; --wood-hi:#77553a; --accent:#d77a6c; --gold:#cfae6a; --seal:#c25a4d;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1d1814; --paper-2:#26201a; --card:#2a231c; --ink:#efe5d4; --ink-2:#c7b8a2; --ink-3:#988a77;
+  --line:#41372d; --wood:#5a3c26; --wood-2:#3b281a; --wood-hi:#77553a; --accent:#d77a6c; --gold:#cfae6a; --seal:#c25a4d;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}
+html.big{ --fs:21px; }
+*{box-sizing:border-box}
+html{font-size:var(--fs); scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--serif);font-weight:700;font-size:1.05rem;white-space:nowrap}
+.seal{width:32px;height:32px;border-radius:6px;background:var(--seal);color:#fbefe6;display:grid;place-items:center;font-family:var(--serif);font-size:18px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.15)}
+.nav{display:flex;gap:4px;margin-left:auto}
+.nav a{text-decoration:none;font-size:.88rem;color:var(--ink-2);padding:6px 10px;border-radius:6px}
+.nav a:hover{background:var(--paper-2);color:var(--ink)}
+.bigbtn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 14px;font-size:.85rem;cursor:pointer;white-space:nowrap}
+.bigbtn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* hero */
+.hero{padding:72px 0 56px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:.72rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(2rem,5.2vw,3.3rem);line-height:1.25;margin:.4em 0 .35em;letter-spacing:-.01em}
+.lede{font-family:var(--serif);font-size:1.15rem;color:var(--ink-2);max-width:36em;margin:0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:44px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{padding:18px 16px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat b{display:block;font-family:var(--serif);font-size:1.9rem;line-height:1.2;font-variant-numeric:tabular-nums}
+.stat span{font-size:.82rem;color:var(--ink-3)}
+.cta{display:inline-flex;align-items:center;gap:8px;margin-top:32px;background:var(--ink);color:var(--paper);text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:500}
+.cta:hover{background:var(--accent)}
+
+/* section heads */
+section{padding:64px 0}
+.sh{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.sh h2{font-family:var(--serif);font-size:1.75rem;margin:.2em 0 0;line-height:1.3}
+.sh p{margin:.3em 0 0;color:var(--ink-2)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.search{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 16px;font:inherit;font-size:.92rem;width:200px;color:var(--ink)}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 14px;font-size:.85rem;cursor:pointer;color:var(--ink-2)}
+.chip[aria-pressed="true"]{background:var(--wood);border-color:var(--wood);color:var(--spine-text)}
+
+/* bookshelf */
+.shelf{margin-bottom:34px}
+.shelf-label{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;font-family:var(--serif)}
+.shelf-label b{font-size:1.1rem}
+.shelf-label span{font-size:.82rem;color:var(--ink-3);font-family:var(--sans)}
+.books{display:flex;flex-wrap:wrap;align-items:flex-end;gap:5px 4px;padding:18px 14px 0;background:linear-gradient(var(--paper-2),var(--paper-2));border-radius:6px 6px 0 0;min-height:60px;position:relative}
+.plank{height:16px;background:linear-gradient(var(--wood-hi),var(--wood) 40%,var(--wood-2));border-radius:0 0 4px 4px;box-shadow:0 6px 10px -6px rgba(40,25,10,.6)}
+.book{--h:200px;--w:46px;height:var(--h);width:var(--w);border:0;padding:10px 0 8px;cursor:pointer;border-radius:3px 3px 1px 1px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;color:var(--spine-text);position:relative;
+  background:linear-gradient(90deg,rgba(0,0,0,.22),rgba(255,255,255,.08) 18%,rgba(0,0,0,0) 40%,rgba(0,0,0,.18)),var(--c);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);transition:transform .18s ease}
+.book::before,.book::after{content:"";position:absolute;left:5px;right:5px;height:2px;background:color-mix(in srgb,var(--gold) 75%,transparent)}
+.book::before{top:30px}.book::after{bottom:30px}
+.book:hover,.book:focus-visible{transform:translateY(-8px)}
+.book .g{font-size:.62rem;letter-spacing:.02em;opacity:.85;font-family:var(--sans)}
+.book .nm{writing-mode:vertical-rl;font-family:var(--serif);font-weight:700;font-size:1.02rem;letter-spacing:.18em}
+.book .yr{font-size:.62rem;opacity:.85;font-variant-numeric:tabular-nums}
+.book.has::after{background:var(--gold);height:3px}
+.empty-note{color:var(--ink-3);padding:20px 0}
+
+/* next shelves */
+.next{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ncard{border:1px dashed var(--line);border-radius:10px;padding:20px;background:transparent}
+.ncard h3{font-family:var(--serif);margin:0 0 4px;font-size:1.1rem}
+.ncard p{margin:0;color:var(--ink-3);font-size:.9rem}
+.ncard .tag{display:inline-block;font-size:.72rem;color:var(--gold);border:1px solid currentColor;border-radius:999px;padding:0 8px;margin-bottom:10px}
+
+/* contribute */
+.contrib{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:32px;display:grid;grid-template-columns:1.1fr 1fr;gap:32px;box-shadow:var(--shadow)}
+.contrib h2{font-family:var(--serif);margin:0 0 8px;font-size:1.6rem}
+.contrib ol{margin:0;padding-left:1.2em}
+.contrib li{margin-bottom:10px}
+.contrib li b{font-family:var(--serif)}
+.muted{color:var(--ink-3);font-size:.88rem}
+
+footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--ink-3);font-size:.85rem}
+
+/* study dialog */
+dialog{border:0;padding:0;max-width:980px;width:calc(100% - 32px);max-height:calc(100vh - 32px);border-radius:14px;background:var(--card);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(25,18,12,.55);backdrop-filter:blur(2px)}
+.study{display:grid;grid-template-columns:280px 1fr;min-height:560px;max-height:calc(100vh - 32px)}
+.cover{background:var(--c,#6e4b30);color:var(--spine-text);padding:36px 28px;position:relative;display:flex;flex-direction:column;
+  background-image:linear-gradient(90deg,rgba(0,0,0,.25),rgba(255,255,255,.06) 8%,rgba(0,0,0,0) 20%)}
+.cover .frame{border:1px solid color-mix(in srgb,var(--gold) 70%,transparent);border-radius:4px;padding:26px 18px;flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+.cover .lbl{font-size:.7rem;letter-spacing:.22em;opacity:.8}
+.cover h3{font-family:var(--serif);font-size:2.3rem;margin:14px 0 2px;letter-spacing:.12em;line-height:1.2}
+.cover .role{font-family:var(--serif);font-size:1.05rem;opacity:.9}
+.cover .rule{width:40px;height:1px;background:var(--gold);margin:16px 0}
+.cover dl{margin:0;font-size:.86rem;display:grid;gap:8px;width:100%}
+.cover dt{opacity:.7;font-size:.74rem}
+.cover dd{margin:0;font-family:var(--serif);font-size:1rem;white-space:nowrap}
+.cover .seal2{margin-top:auto;width:44px;height:44px;border:2px solid #f2c9bd;color:#f2c9bd;border-radius:6px;display:grid;place-items:center;font-family:var(--serif);font-size:1.1rem;transform:rotate(-4deg);opacity:.85}
+.pane{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.pane-top{display:flex;align-items:center;gap:6px;padding:14px 18px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{border:0;background:none;padding:10px 12px 12px;cursor:pointer;color:var(--ink-3);border-bottom:2px solid transparent;font-weight:500;font-size:.95rem}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.x{margin-left:auto;border:0;background:var(--paper-2);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem;margin-bottom:8px}
+.pane-body{padding:26px 30px;overflow:auto;flex:1}
+.pane-body h4{font-family:var(--serif);font-size:1.3rem;margin:0 0 4px}
+.pane-body .sub{color:var(--ink-3);font-size:.85rem;margin:0 0 22px}
+.tl{list-style:none;margin:0;padding:0;position:relative}
+.tl::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.tl li{position:relative;padding:0 0 22px 32px}
+.tl li::before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;background:var(--card);border:2px solid var(--gold)}
+.tl li.key::before{background:var(--accent);border-color:var(--accent)}
+.tl time{display:block;font-size:.8rem;color:var(--ink-3);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.tl .t{font-family:var(--serif);font-size:1.05rem}
+.src{display:inline-block;font-size:.7rem;color:var(--ink-3);border:1px solid var(--line);border-radius:999px;padding:0 7px;margin-left:6px;vertical-align:2px;font-family:var(--sans)}
+.peers{margin-top:8px;padding-top:20px;border-top:1px solid var(--line)}
+.peers h5{margin:0 0 10px;font-size:.9rem;color:var(--ink-2)}
+.peer{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:4px 12px;margin:0 6px 6px 0;cursor:pointer;font-family:var(--serif);font-size:.95rem}
+.peer:hover{border-color:var(--accent);color:var(--accent)}
+.waiting{border:1px dashed var(--line);border-radius:12px;padding:36px 28px;text-align:center;background:var(--paper)}
+.waiting .ic{font-family:var(--serif);font-size:2rem;color:var(--gold)}
+.waiting h4{margin:8px 0 6px}
+.waiting p{color:var(--ink-2);margin:0 auto;max-width:28em}
+.bio p{font-family:var(--serif);font-size:1.08rem;line-height:1.95;margin:0 0 1.1em}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.photos figure{margin:0}.photos img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;display:block}
+.photos figcaption{font-size:.85rem;color:var(--ink-2);margin-top:6px}
+.voice{border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px}
+.voice audio{width:100%;margin-top:8px}
+.voice .tr{font-family:var(--serif);font-size:1.1rem;margin-top:10px}
+.pager{display:flex;justify-content:space-between;gap:10px;padding:12px 18px;border-top:1px solid var(--line);font-size:.88rem}
+.pager button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;cursor:pointer}
+.pager button:hover{border-color:var(--ink)}
+.pager .hint{color:var(--ink-3);align-self:center}
+
+@media (max-width:820px){
+  .nav{display:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .next{grid-template-columns:1fr}
+  .contrib{grid-template-columns:1fr;padding:24px}
+  .study{grid-template-columns:1fr;max-height:none}
+  dialog{overflow:auto}
+  .cover{padding:20px}
+  .cover .frame{padding:16px}
+  .cover h3{font-size:1.8rem;margin-top:4px}
+  .cover dl{grid-template-columns:repeat(3,1fr);text-align:center}
+  .cover .seal2{display:none}
+  .pane-body{padding:20px 18px}
+  .pager .hint{display:none}
+}
+@media (max-width:480px){
+  .wrap{padding:0 16px}
+  .hero{padding:44px 0 36px}
+  .book{--h:170px;--w:40px}
+  .search{width:100%}
+  .tools{width:100%}
+  .stat b{font-size:1.35rem;white-space:nowrap}
+  .brand .long{display:none}
+  .top .wrap{gap:10px}
+  .bigbtn{margin-left:auto;padding:5px 12px}
+  .pane-top{flex-wrap:nowrap;padding:8px 10px 0;gap:0}
+  .tab{padding:10px 8px 12px;font-size:.88rem;white-space:nowrap}
+  .x{flex:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#lobby"><span class="seal" aria-hidden="true">南</span>남서울교회<span class="long">&nbsp;시니어 아카이브</span></a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#lobby">로비</a>
+      <a href="#shelf">은퇴장로 서가</a>
+      <a href="#next">다음 서가</a>
+      <a href="#contribute">기록 보내기</a>
+    </nav>
+    <button class="bigbtn" id="bigBtn" aria-pressed="false">가 글씨 크게</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="lobby">
+    <div class="wrap">
+      <div class="eyebrow">Namseoul Church · Senior Archive · Est. 2026</div>
+      <h1>반세기를 함께 걸어 온<br>어른들의 서재</h1>
+      <p class="lede">1975년 반포동 작은 아파트에서 시작된 남서울교회. 그 길을 지켜 온 어른들의 이야기를 한 권의 책으로 모읍니다. 첫 서가는 은퇴장로님들의 자리입니다.</p>
+      <div class="stats" id="stats"></div>
+      <a class="cta" href="#shelf">서가 둘러보기 →</a>
+    </div>
+  </section>
+
+  <section id="shelf">
+    <div class="wrap">
+      <div class="sh">
+        <div>
+          <div class="eyebrow">제1서가</div>
+          <h2>은퇴장로</h2>
+          <p>책등을 누르면 그분의 서재가 열립니다. 은퇴하신 순서로 꽂혀 있습니다.</p>
+        </div>
+        <div class="tools">
+          <input class="search" id="q" type="search" placeholder="이름 찾기" aria-label="이름으로 찾기">
+          <div id="chips" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+        </div>
+      </div>
+      <div id="shelves"></div>
+    </div>
+  </section>
+
+  <section id="next" style="padding-top:8px">
+    <div class="wrap">
+      <div class="sh"><div><div class="eyebrow">준비 중인 서가</div><h2>다음으로 채워 갈 자리</h2></div></div>
+      <div class="next">
+        <div class="ncard"><span class="tag">제2서가</span><h3>원로목사 · 역대 교역자</h3><p>홍정길 원로목사와 이철 목사, 그리고 교회를 섬겨 온 사역자들의 기록.</p></div>
+        <div class="ncard"><span class="tag">제3서가</span><h3>은퇴권사 · 원로권사</h3><p>1979년 초대 권사 취임부터 이어진 기도의 어머니들.</p></div>
+        <div class="ncard"><span class="tag">제4서가</span><h3>은퇴안수집사 · 은퇴선교사</h3><p>교회 곳곳을 받쳐 온 손길과 땅끝으로 나아간 발걸음.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contribute">
+    <div class="wrap">
+      <div class="contrib">
+        <div>
+          <div class="eyebrow">함께 만드는 기록</div>
+          <h2>빈 페이지를 채워 주세요</h2>
+          <p>지금 서가에는 교회 공식 연혁에 남은 사실만 담겨 있습니다. 자서전, 사진, 목소리는 본인과 가족, 교우 여러분이 보내 주시는 기록으로 채워집니다.</p>
+          <p class="muted">보내 주신 자료는 본인 또는 가족의 동의를 확인한 뒤에 게시합니다.</p>
+        </div>
+        <ol>
+          <li><b>자서전 · 회고</b><br>살아오신 이야기, 신앙의 고비, 교회와 얽힌 추억. 구술을 받아 적은 글도 좋습니다.</li>
+          <li><b>사진관</b><br>젊은 날과 지금의 사진, 임직식·수련회·선교지 사진. 연도와 설명을 함께 적어 주세요.</li>
+          <li><b>목소리</b><br>짧은 육성 인사나 간증 녹음. 글자로 옮긴 자막을 함께 실어 드립니다.</li>
+          <li><b>전달 방법</b><br>아카이브 담당자에게 파일과 함께 성함·관계·연락처를 전해 주세요.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    남서울교회 시니어 아카이브 · 장립·은퇴 기록 출처: <a id="srcLink" href="#" target="_blank" rel="noopener">남서울교회 연혁</a><br>
+    연혁에 기록이 없는 항목은 비워 두었습니다. 잘못된 내용이나 빠진 분이 있으면 알려 주세요.
+  </div>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dlgName"></dialog>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  const E = window.ELDERS || [], S = window.STORIES || {};
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const key = e => e.n + (e.tag || "");
+  const year = d => +String(d).slice(0,4);
+  const genTxt = g => g === 1 ? "초대" : g + "대";
+  const PAL = ["#6e4b30","#7a2e2a","#2f4a3d","#34405e","#5b3a52","#7b5a2a","#4a5a3a","#5a3428","#3d4f5c","#6a4a3a"];
+  E.forEach((e,i) => { e.id = i; e.c = PAL[(i*7 + e.n.charCodeAt(0)) % PAL.length]; e.st = S[key(e)] || S[e.n] && !e.tag && S[e.n] || {}; });
+  $("#srcLink").href = window.ARCHIVE_SOURCE;
+
+  // big text
+  const html = document.documentElement, bb = $("#bigBtn");
+  const setBig = on => { html.classList.toggle("big", on); bb.setAttribute("aria-pressed", on); try{ localStorage.setItem("nsa-big", on ? "1" : ""); }catch(_){} };
+  try{ if (localStorage.getItem("nsa-big")) setBig(true); }catch(_){}
+  bb.onclick = () => setBig(!html.classList.contains("big"));
+
+  // stats
+  const gens = E.filter(e => e.o && e.o[0]).map(e => e.o[0]);
+  $("#stats").innerHTML = [
+    [E.length + "분", "은퇴장로"],
+    ["1976", "초대 장로 장립"],
+    [year(E[0].r) + "–" + year(E[E.length-1].r), "은퇴 기록"],
+    ["초대–" + Math.max(...gens) + "대", "장립 대수"]
+  ].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+
+  // shelves
+  const DEC = [["all","전체"],["2000","2000년대"],["2010","2010년대"],["2020","2020년대"]];
+  let dec = "all", q = "";
+  $("#chips").innerHTML = DEC.map(([v,l]) => `<button class="chip" data-v="${v}" aria-pressed="${v==="all"}">${l}</button>`).join("");
+  $("#chips").onclick = ev => { const b = ev.target.closest(".chip"); if(!b) return; dec = b.dataset.v;
+    document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === b)); draw(); };
+  $("#q").oninput = ev => { q = ev.target.value.trim(); draw(); };
+
+  function spine(e){
+    const h = 176 + ((e.id * 37) % 5) * 9, w = 42 + ((e.id * 13) % 3) * 4;
+    const g = e.k === "협동" ? "협동" : e.k === "취임" ? "취임" : e.o && e.o[0] ? genTxt(e.o[0]) : "長老";
+    const has = e.st.bio || e.st.photos || e.st.voices;
+    return `<button class="book${has?" has":""}" style="--c:${e.c};--h:${h}px;--w:${w}px" data-id="${e.id}" aria-label="${esc(e.n)} 장로의 서재 열기">
+      <span class="g">${g}</span><span class="nm">${esc(e.n)}</span><span class="yr">${year(e.r)}</span></button>`;
+  }
+  function draw(){
+    const list = E.filter(e => (dec === "all" || String(Math.floor(year(e.r)/10)*10) === dec) && (!q || e.n.includes(q)));
+    if (!list.length){ $("#shelves").innerHTML = `<p class="empty-note">찾으시는 분이 서가에 없습니다. 빠진 분이 있다면 알려 주세요.</p>`; return; }
+    const groups = {};
+    list.forEach(e => { const d = Math.floor(year(e.r)/10)*10; (groups[d] = groups[d] || []).push(e); });
+    $("#shelves").innerHTML = Object.keys(groups).sort().map(d => {
+      const g = groups[d], ys = g.map(e => year(e.r));
+      return `<div class="shelf"><div class="shelf-label"><b>${d}년대 은퇴</b><span>${g.length}분 · ${Math.min(...ys)}–${Math.max(...ys)}</span></div>
+        <div class="books">${g.map(spine).join("")}</div><div class="plank"></div></div>`;
+    }).join("");
+  }
+  $("#shelves").onclick = ev => { const b = ev.target.closest(".book"); if (b) open(+b.dataset.id); };
+  draw();
+
+  // study
+  const dlg = $("#dlg"); let cur = null, tab = "life";
+  function events(e){
+    const ev = [];
+    if (e.d) ev.push([e.d, `안수집사로 ${e.dk || "장립"}`, 0]);
+    if (e.o) ev.push([e.o[1], e.k === "취임" ? "남서울교회 장로로 취임" : `장로로 장립${e.o[0] ? ` (${genTxt(e.o[0])})` : ""}`, 1]);
+    (e.x || []).forEach(x => { const same = ev.find(v => v[0] === x[0]); if (same) same[1] = x[1]; else ev.push([x[0], x[1], 0]); });
+    (e.st.events || []).forEach(x => ev.push([x.date, x.text, 0, x.src || "제공 기록"]));
+    ev.push([e.r, `직분자 은퇴식에서 은퇴${e.rn ? ` (${e.rn})` : ""}`, 1]);
+    ev.sort((a,b) => String(a[0]).localeCompare(String(b[0])));
+    // merge x-ordination notes into ordination line
+    return ev;
+  }
+  function life(e){
+    const peers = E.filter(p => p.r === e.r && p.id !== e.id);
+    const missing = !e.o ? `<p class="muted" style="margin-top:-8px">장로 장립 일자가 연혁에 남아 있지 않습니다. 아시는 분은 알려 주세요.</p>` : "";
+    return `<h4>걸어온 발자취</h4><p class="sub">남서울교회 공식 연혁에 남은 기록입니다.</p>
+      <ol class="tl">${events(e).map(v => `<li class="${v[2]?"key":""}"><time>${esc(v[0])}</time><span class="t">${esc(v[1])}</span><span class="src">${esc(v[3] || "교회 연혁")}</span></li>`).join("")}</ol>
+      ${missing}
+      ${peers.length ? `<div class="peers"><h5>같은 날 함께 은퇴하신 분</h5>${peers.map(p => `<button class="peer" data-id="${p.id}">${esc(p.n)} 장로</button>`).join("")}</div>` : ""}`;
+  }
+  const wait = (ic, t, p) => `<div class="waiting"><div class="ic">${ic}</div><h4>${t}</h4><p>${p}</p><p style="margin-top:14px"><a href="#contribute" data-close>기록 보내는 방법 보기 →</a></p></div>`;
+  function bio(e){
+    if (!e.st.bio) return wait("冊", "아직 쓰이지 않은 자서전", `${esc(e.n)} 장로님의 살아오신 이야기를 기다립니다. 본인의 글이나 가족이 받아 적은 구술도 좋습니다.`);
+    return `<h4>자서전</h4><div class="bio">${e.st.bio.map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
+  }
+  function photos(e){
+    if (!e.st.photos) return wait("影", "사진관이 비어 있습니다", "젊은 날의 모습, 임직식과 교회 행사, 가족과 함께한 순간을 보내 주세요.");
+    return `<h4>사진관</h4><div class="photos">${e.st.photos.map(p => `<figure><img src="${esc(p.src)}" alt="${esc(p.caption||"")}" loading="lazy"><figcaption>${p.year?esc(p.year)+" · ":""}${esc(p.caption||"")}</figcaption></figure>`).join("")}</div>`;
+  }
+  function voices(e){
+    if (!e.st.voices) return wait("聲", "목소리 기록을 기다립니다", "짧은 인사, 간증, 찬송 한 소절도 귀한 유산이 됩니다. 녹음 파일과 자막을 함께 실어 드립니다.");
+    return `<h4>목소리</h4>${e.st.voices.map(v => `<div class="voice"><b>${esc(v.title||"")}</b><audio controls preload="none" src="${esc(v.src)}"></audio>${v.transcript?`<div class="tr">${esc(v.transcript)}</div>`:""}</div>`).join("")}`;
+  }
+  const TABS = [["life","걸어온 발자취",life],["bio","자서전",bio],["photo","사진관",photos],["voice","목소리",voices]];
+  function render(){
+    const e = E[cur];
+    const g = e.k === "협동" ? "협동장로" : e.o && e.o[0] ? genTxt(e.o[0]) + " 장로" : "장로";
+    dlg.style.setProperty("--c", e.c);
+    dlg.innerHTML = `<div class="study">
+      <div class="cover" style="--c:${e.c}"><div class="frame">
+        <div class="lbl">NAMSEOUL ARCHIVE</div>
+        <h3 id="dlgName">${esc(e.n)}</h3><div class="role">${e.k==="협동"?"협동장로":"은퇴장로"}</div>
+        <div class="rule"></div>
+        <dl><div><dt>장로 장립</dt><dd>${e.o ? (e.k==="취임" ? "취임 " : "") + esc(e.o[1].slice(0,4)) + (e.o[0] ? " · " + genTxt(e.o[0]) : "") : "기록 없음"}</dd></div>
+        <div><dt>은퇴</dt><dd>${esc(e.r)}</dd></div>
+        <div><dt>서가 번호</dt><dd>제1서가 ${String(e.id+1).padStart(2,"0")}</dd></div></dl>
+        <div class="seal2" aria-hidden="true">${esc(e.n.slice(-1))}</div>
+      </div></div>
+      <div class="pane">
+        <div class="pane-top" role="tablist">${TABS.map(([k,l]) => `<button class="tab" role="tab" data-t="${k}" aria-selected="${k===tab}">${l}</button>`).join("")}
+          <button class="x" data-close aria-label="서재 닫기">✕</button></div>
+        <div class="pane-body" role="tabpanel">${TABS.find(t => t[0]===tab)[2](e)}</div>
+        <div class="pager"><button data-go="-1">← 이전 서재</button><span class="hint">키보드 ← → 로 넘겨 보세요</span><button data-go="1">다음 서재 →</button></div>
+      </div></div>`;
+  }
+  function open(id, t){
+    cur = (id + E.length) % E.length; tab = t || "life"; render();
+    if (!dlg.open) dlg.showModal();
+    history.replaceState(null, "", "#e/" + encodeURIComponent(key(E[cur])));
+  }
+  function close(){ dlg.close(); }
+  dlg.addEventListener("close", () => { if (location.hash.startsWith("#e/")) history.replaceState(null, "", "#shelf"); });
+  dlg.onclick = ev => {
+    if (ev.target === dlg) return close();
+    const t = ev.target.closest("[data-t]"); if (t){ tab = t.dataset.t; render(); dlg.querySelector(`[data-t="${tab}"]`).focus(); return; }
+    const g = ev.target.closest("[data-go]"); if (g) return open(cur + +g.dataset.go, tab);
+    const p = ev.target.closest(".peer"); if (p) return open(+p.dataset.id);
+    if (ev.target.closest("[data-close]")) close();
+  };
+  dlg.addEventListener("keydown", ev => {
+    if (ev.target.tagName === "AUDIO") return;
+    if (ev.key === "ArrowRight") { ev.preventDefault(); open(cur + 1, tab); }
+    if (ev.key === "ArrowLeft") { ev.preventDefault(); open(cur - 1, tab); }
+  });
+  const m = location.hash.match(/^#e\/(.+)$/);
+  if (m){ const k = decodeURIComponent(m[1]); const f = E.find(e => key(e) === k); if (f) open(f.id); }
+})();
+</script>
+</body>
+</html>
